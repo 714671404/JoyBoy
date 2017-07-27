@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+/*
+ * 发送邮件出发rul
+ */
+Route::get('/email/varify/{token}', ['as' => 'email.varify', 'uses' => 'EmailController@varify']);
