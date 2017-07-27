@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">欢迎进入</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    精彩内容抢先看
                 </div>
             </div>
         </div>

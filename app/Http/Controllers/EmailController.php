@@ -18,6 +18,11 @@ class EmailController extends Controller
         $user = User::where('confirmation_token', $token)->first();
 
         if (is_null($user)) {
+            /*
+             * important() 正常使用应该在加上这个方法才会出现消失提示的按钮，
+             * 不过可以在源码哪里把button拿出来就可以正常使用了
+             */
+            flash('激活失败')->error();
             return redirect('/');
         }
 
@@ -26,6 +31,11 @@ class EmailController extends Controller
         $user->save();
 
         \Auth::login($user);
+        /*
+         * important() 正常使用应该在加上这个方法才会出现消失提示的按钮，
+         * 不过可以在源码哪里把button拿出来就可以正常使用了
+         */
+        flash('激活成功')->success();
 
         return redirect('/home');
     }

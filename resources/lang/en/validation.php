@@ -100,8 +100,14 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name'  => [
+            'unique' => '用户名已存在'
+        ],
+        'email' => [
+            'unique' => '邮箱已经存在',
+        ],
+        'password' => [
+            'confirmed' => '两次密码不一致',
         ],
     ],
 

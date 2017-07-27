@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'JoyBoy'),
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Naux\Mail\SendCloudServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
         /*
          * Application Service Providers...
          */
