@@ -20,6 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 /*
- * 发送邮件出发rul
+ * 发送邮件出发url
  */
 Route::get('/email/varify/{token}', ['as' => 'email.varify', 'uses' => 'EmailController@varify']);
+
+/*
+ * 发表问题url
+ */
+Route::resource('questions', 'QuestionsController', ['names' => [
+    'create' => 'question.create',
+    'show'   => 'question.show'
+]]);

@@ -73,9 +73,8 @@
         <div class="container" style="width: 47%;">
             @include('flash::message')
         </div>
-        @yield('content')
     </div>
-
+    @yield('content')
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
