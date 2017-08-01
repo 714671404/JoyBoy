@@ -29,9 +29,45 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /*
+     * answers 定义一对多关系
+     */
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    /*
+     * owns 判断用户是否是发表人
+     */
     public function owns($model)
     {
         return $this->id === $model->user_id;
+    }
+
+    /*
+     * 定义Question多对多的关系
+     */
+    public function follows()
+    {
+        return $this->belongsToMany(Question::class, 'user_question')->withTimestamps();
+    }
+
+    /*
+     * followThis 这个方法 当中使用 “toggle” 方法，
+     * 这个方法用于判断数据库是否存在某一个值，存在删除，不存在添加
+     */
+    public function followThis($question)
+    {
+        return $this->follows()->toggle($question);
+    }
+
+    /*
+     * followed 方法判断用户是否关注过这个问题
+     */
+    public function followed($question)
+    {
+        return !! $this->follows()->where('question_id', $question)->count();
     }
     
     /*

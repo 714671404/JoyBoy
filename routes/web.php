@@ -29,3 +29,13 @@ Route::resource('questions', 'QuestionsController', ['names' => [
     'create' => 'question.create',
     'show'   => 'question.show'
 ]]);
+
+/*
+ * 评论url
+ */
+Route::post('/questions/{question}/answer', 'AnswersController@store');
+
+/*
+ * 关注信息url
+ */
+Route::get('/question/{question}/follow', 'QuestionFollowController@follow');

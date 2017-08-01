@@ -9,9 +9,9 @@ use App\User;
 
 class QuestionRepository
 {
-    public function byIdWithTopic($id)
+    public function byIdWithTopicAndAnswers($id)
     {
-        return Question::where('id', $id)->with('topics')->first();
+        return Question::where('id', $id)->with(['topics', 'answers'])->first();
     }
 
     public function byId($id)

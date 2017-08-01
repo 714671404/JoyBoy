@@ -20,6 +20,19 @@ class Question extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    /*
+     * 定义User多对多的关系
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'user_question')->withTimestamps();
+    }
+
     public function scopePublished($query)
     {
         return $query->where('is_hidden', 'F');
