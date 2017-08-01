@@ -12,6 +12,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]);?>
+    </script>
 </head>
 <body>
     <div id="app">
@@ -75,9 +83,10 @@
         </div>
     </div>
     @yield('content')
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
+    <!-- Scripts -->
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+    @yield('js')
     <script>
         $('#flash-overlay-modal').modal();
     </script>

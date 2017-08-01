@@ -29,6 +29,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function owns($model)
+    {
+        return $this->id === $model->user_id;
+    }
+    
     /*
      * 这个方法负责发送邮件 并且覆盖 trait注入的methdos
      */
