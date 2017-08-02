@@ -23,14 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/email/varify/{token}', ['as' => 'email.varify', 'uses' => 'EmailController@varify']);
 
 /*
- * 发表问题url
- */
-Route::resource('questions', 'QuestionsController', ['names' => [
-    'create' => 'question.create',
-    'show'   => 'question.show'
-]]);
-
-/*
  * 评论url
  */
 Route::post('/questions/{question}/answer', 'AnswersController@store');
@@ -38,4 +30,11 @@ Route::post('/questions/{question}/answer', 'AnswersController@store');
 /*
  * 关注信息url
  */
-Route::get('/question/{question}/follow', 'QuestionFollowController@follow');
+Route::post('/api/question/follow', 'QuestionFollowController@followedAjaxAll');
+/*
+ * 发表问题url
+ */
+Route::resource('questions', 'QuestionsController', ['names' => [
+    'create' => 'question.create',
+    'show'   => 'question.show'
+]]);

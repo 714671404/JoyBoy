@@ -1,6 +1,6 @@
-var app = new Vue({
-    el: '#app',
+var follow = new Vue({
+    el: '#follow',
     data: {
-        message:'hello world'
+        message:'hello worlds'
     }
 })

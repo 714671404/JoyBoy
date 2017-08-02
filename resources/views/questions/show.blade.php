@@ -35,12 +35,23 @@
                         <h2>{{ $question->followers_count }}</h2>
                         <span>关注者</span>
                     </div>
-                    <div class="panel-body" id="app">
-                        {{--<a href="/question/{{ $question->id }}/follow"--}}
-                           {{--class="btn btn-default {{ Auth::user()->followed($question->id) ? 'btn-success' : ''}}">--}}
-                            {{--{{ Auth::user()->followed($question->id) ? '已关注' : '关注这个问题'}}--}}
-                        {{--</a>--}}
-                        <a href="" class="btn btn-default">@{{ message }}</a>
+
+                    <div class="panel-body">
+                        @if(!Auth::check())
+                            <a href="/login" class="btn btn-default">关注这个问题</a>
+                        @else
+                            {{--纯粹php实现点赞功能页面存在刷新--}}
+                            {{--<a href="/question/{{ $question->id }}/follow" id="follow"--}}
+                               {{--class="btn btn-default {{ Auth::user()->followed($question->id)  ? 'btn-success' : ''}}">--}}
+                                {{--{{ Auth::user()->followed($question->id) ? '已关注' : '关注这个问题'}}--}}
+                            {{--</a>--}}
+
+                            {{--js+php实现点赞功能页面不存在刷新--}}
+                            <a href="javascript:void(0);" id="follow"
+                               class="btn btn-default ">
+                                {{ Auth::user()->followed($question->id) ? '已关注' : '关注这个问题'}}
+                            </a>
+                        @endif
                         <a href="#editor" class="btn btn-primary pull-right">编写答案</a>
                     </div>
                 </div>
@@ -93,8 +104,32 @@
             </div>
         </div>
     </div>
-    <script src="/js/vue.js"></script>
+    <script src="/js/vue.min.js"></script>
     <script src="/js/QuestionFollowButton.js"></script>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script>
+        $('#follow').click(function () {
+            $.ajax({
+                type: 'post',
+                url: '{{ url('/api/question/follow') }}',
+                data: {
+                    question_id: '{{ $question->id }}',
+                    _token: window.Laravel.csrfToken
+                },
+                success: function (data) {
+                    var boolean = data.boolean;
+                    var follow = $('#follow');
+                    if (boolean) {
+                        follow.addClass('btn-success');
+                        follow.html('已关注');
+                    } else {
+                        follow.removeClass('btn-success');
+                        follow.html('关注这个问题');
+                    }
+                }
+            });
+        });
+    </script>
     <script type="text/javascript">
         <!-- 实例化编辑器 -->
         var ue = UE.getEditor('container', {
