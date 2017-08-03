@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +29,7 @@ Route::post('/questions/{question}/answer', 'AnswersController@store');
 /*
  * 关注信息url
  */
-Route::post('/api/question/follow', 'QuestionFollowController@followedAjaxAll');
+//Route::post('/api/question/follow', 'QuestionFollowController@followedAjaxAll');
 /*
  * 发表问题url
  */

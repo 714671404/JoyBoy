@@ -32,7 +32,7 @@
             <div class="col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-heading question-follow">
-                        <h2>{{ $question->followers_count }}</h2>
+                        <h2 id="concern">{{ $question->followers_count }}</h2>
                         <span>关注者</span>
                     </div>
 
@@ -113,18 +113,23 @@
                 type: 'post',
                 url: '{{ url('/api/question/follow') }}',
                 data: {
+                    user_id: '{{ Auth::id() }}',
                     question_id: '{{ $question->id }}',
                     _token: window.Laravel.csrfToken
                 },
                 success: function (data) {
-                    var boolean = data.boolean;
+                    var followed = data.followed;
+                    var count = data.count;
                     var follow = $('#follow');
-                    if (boolean) {
+                    var concern = $('#concern');
+                    if (followed) {
                         follow.addClass('btn-success');
                         follow.html('已关注');
+                        concern.html(count);
                     } else {
                         follow.removeClass('btn-success');
                         follow.html('关注这个问题');
+                        concern.html(count);
                     }
                 }
             });

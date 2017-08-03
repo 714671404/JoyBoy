@@ -46,6 +46,13 @@ class User extends Authenticatable
     }
 
     /*
+     * 声明用户之间多对多关系
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(self::class, 'followers', 'follower_id', 'followed_id')->withTimestamps();
+    }
+    /*
      * 定义Question多对多的关系
      */
     public function follows()
